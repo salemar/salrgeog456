@@ -1,0 +1,51 @@
+<html>
+    <head>
+        <title>Leaflet</title>
+        <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+        integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY="
+        crossorigin=""/>
+        <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+        integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
+        crossorigin=""></script>
+    </head>
+    <body>
+        <h1>Homework 2: Leaflet Map</h1>
+        <h2>Cape Hatteras Light Station.</h2>    
+        <div id="mapid"></div>
+    <style>
+        #mapid{ width: 800px; height: 600px; }
+        body {
+            background-color: black;    }
+        h1 {
+            color:rgb(0, 245, 164);
+            font-family: monospace;
+            position:fixed;
+            top:50px;
+            right: 70px;    }
+        h2 {
+            color:rgb(161, 240, 214);
+            font-family: monospace;
+            position:fixed;
+            top:100px;
+            right: 70px;    }
+    </style>
+    <script>  
+        var map = L.map('mapid').setView([35.250556, -75.528806], 13); // YOU CAN CHANGE THE ZOOM
+
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+            }).addTo(map);
+
+        var uncIcon = L.icon({    
+            iconUrl: './capeHat.png',   
+            iconSize: [40,60],
+            popupAnchor: [0,0] 
+            });
+        var customPopup = "The Cape Hatteras Light Station was constructed in 1870. It was mannually operated until 1950, when it became automated.<br/><img src='./lighthouse.png' width='100px'/>";
+   
+        L.marker([35.250556, -75.528806], {icon: uncIcon})
+        .bindPopup(customPopup)
+        .addTo(map)
+    </script>
+    </body>
+</html>
