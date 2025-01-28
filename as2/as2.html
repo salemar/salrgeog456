@@ -10,47 +10,41 @@
         <script src="storms.js" ></script>
     </head>
     <body>
-    This is not as hard as I thought. 
+        <h1>Hurricane Sam, 2021.</h1>
     <div id="mapid"></div>
     
     <style>
-        #mapid{ width: 900px; height: 500px; }
+        #mapid{ width: 850px; height: 600px; }
+        body {
+            background-color: black;    }
+        h1 {
+            color:rgb(0, 245, 164);
+            font-family: monospace;
+            position:fixed;
+            top:50px;
+            right: 70px;    }
+        h2 {
+            color:rgb(161, 240, 214);
+            font-family: monospace;
+            position:fixed;
+            top:100px;
+            right: 70px;    }
     </style>
     <script>  
-    // this means that the following lines will be script 
-    // (it could also or point to an external script file). 
 
-    var map = L.map('mapid').setView([36, -33.100], 3.4); // YOU CAN CHANGE THE ZOOM
-
-    // this line is creating the variable map by  initializing the L.map class (a Leaflet class) with the mapid element that we created before. setView is a method that can be applied to the class L.map : you can give it a latitude, longitude and a zoom.  The higher the value of the zoom, the finer the initial scale of the map. 
+    var map = L.map('mapid').setView([36, -33.100], 3.45); 
 
     L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/Ocean/World_Ocean_Base/MapServer/tile/{z}/{y}/{x}', {
 	attribution: 'Tiles &copy; Esri &mdash; Sources: GEBCO, NOAA, CHS, OSU, UNH, CSUMB, National Geographic, DeLorme, NAVTEQ, and Esri',
 	maxZoom: 13}).addTo(map);
 
-    // L.tileLayer can display a tile layer. You can check out other tile layer examples at https://leaflet-extras.github.io/leaflet-providers/preview/. The location of the tile layer needs to be in single quotes. You can also indicate the attribution for that layer. In this example we used the Open StreetMap attribution. The '&copy; <a> and the other information you see here is HTML code adding a copyright sign, and making a hyperlink to OpenStreetMap. 
-    // At the end we include .addTo(map), which is indicating to add the tile layer to the variable map. 
-
-    // L.marker([10, -33.100]).addTo(map)
-    //     .bindPopup('Hey I am at Carolina Hall 322') // YOU CAN CHANGE THE MESSAGE
-    //     .openPopup();
-    
-    // create custom icon variable
-    var hIcon = L.icon({    // notice the L.icon which is a Leaflet object with properties
+    var hIcon = L.icon({    
         iconUrl: 'hurricane.png',   
-          // this points to a jpg image obtained from the internet
-        iconSize: [30,30], // size of the icon
-        popupAnchor: [0,0] // where the icon is located relative to the lat lon of the point. 
-        });
-    //YOU COULD CHANGE the iconURL, iconSize and popupAnchor to see how the map changes
+        iconSize: [30,30], 
+        popupAnchor: [0,0] 
+    });
 
-
-    // create an HTML variable that will pop up with a UNC Well photo
-        var customPopup = "Hurricane Sam<br/><img src='hImage.jpg' width='100px'/>";
-    // YOU COULD CHANGE the https link to another picture. 
-    // YOU COULD CHANGE the 100px to other values like 50px or 400px to see what happens
-
-    // the following line should go at the end, before script closing tag 
+        var customPopup = "Hurricane Sam<br/><img src='hImage.jpg' width='200px'/>";
 
     L.geoJSON(storms, { 
     pointToLayer: function (feature, latlng) {
@@ -58,7 +52,6 @@
     .bindPopup(customPopup)
     .addTo(map); 
     
-    // end of script
     </script>
     </body>
 </html>
