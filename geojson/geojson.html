@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Assignment 3</title>
+</head>
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY="
+crossorigin=""/>
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
+crossorigin=""></script>
+<style>
+        #map{ width: 850px; height: 600px;   float: left;}
+        #title { width: 300px; position:fixed; right: 70px}
+        body {
+            background-color: black;    }
+        h1 {
+            color:rgb(0, 245, 164);
+            font-family: monospace;
+            right: 70px;    }
+        h2 {
+            color:rgb(161, 240, 214);
+            font-family: monospace;
+            right: 70px;    }
+        h3 {
+            color:rgb(199, 253, 235);
+            font-family: monospace;
+            position:fixed;
+            right: 20px;        }
+</style>
+<body>
+    <div id="title">
+        <h3><a href='../index.html'>Home</a></h3>
+        <h1>Shipwrecks on the United States Eastern Seaboard.</h1>
+        <br>
+        <h2><a href=https://ocean-and-coasts-information-system-esrioceans.hub.arcgis.com/datasets/noaa::wrecks-and-obstructions/about>Source dataset</a></h2>
+    </div>
+    <div id="map"></div>
+    <script src="wrecks.js"></script>
+    <script>
+    
+        var map = L.map('map').setView([34.75, -75.59], 4.5);
+                
+    </script>   
+    <script src="wreckCode.js"></script>
+</body>
+</html>
+
+<!-- https://ocean-and-coasts-information-system-esrioceans.hub.arcgis.com/datasets/noaa::wrecks-and-obstructions/about -->
