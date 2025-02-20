@@ -1,141 +1,137 @@
 <!DOCTYPE html>
 <html>
 <head>
-<style>
-/* body {
-  background-color: black;
-}
-h1 {
-    position: relative;
+  <style>
+  body {
+    background-color: black;
+  }
+  h1 {
+      position: relative;
+      text-align: center;
+      top: 25%;
+      font-family: 'Courier New', Courier, monospace;
+      color:rgb(0, 245, 164);
+  }
+  h2 {
+      position: relative;
+      text-align: center;
+      top: 25%;
+      font-family: 'Courier New', Courier, monospace;
+      color:rgb(161, 240, 214);
+  }
+  h3 {
+              color:rgb(199, 253, 235);
+              font-family: monospace;
+              position:relative;
+              top:20px;
+              text-align: right
+                      }
+  a {
+      cursor: cell;
+      position: relative;
+      text-align: center;
+      top: 25%;
+      font-family: 'Courier New', Courier, monospace;
+      color:rgb(161, 240, 214);
+  }
+
+  table {
+    font-family: Tahoma, sans-serif;
+    color: white;
+    border-collapse: collapse;
+    width: 100%;
+    border-radius: 8px; 
+    overflow: hidden; 
+  }
+
+  tr:nth-child(even) {background-color: #2a2a2a;}
+  tr:hover {font-weight: bolder;}
+
+  th {
+    border: 1px solid #dddddd;
     text-align: center;
-    top: 25%;
+    padding: 10px;
     font-family: 'Courier New', Courier, monospace;
+    font-weight:bold;
+    font-size: larger;
     color:rgb(0, 245, 164);
-}
-h2 {
-    position: relative;
-    text-align: center;
-    top: 25%;
-    font-family: 'Courier New', Courier, monospace;
-    color:rgb(161, 240, 214);
-}
-h3 {
-            color:rgb(199, 253, 235);
-            font-family: monospace;
-            position:relative;
-            top:20px;
-            text-align: right
-                    }
-a {
-    cursor: cell;
-    position: relative;
-    text-align: center;
-    top: 25%;
-    font-family: 'Courier New', Courier, monospace;
-    color:rgb(161, 240, 214);
-} */
+  }
 
-table {
-  font-family: Tahoma, sans-serif;
-  color: white;
-  border-collapse: collapse;
-  width: 100%;
-  border-radius: 8px; 
-  overflow: hidden; 
-}
+  td {
+    border: 1px solid #dddddd;
+    text-align: left;
+    padding: 10px;
+  }
+  </style>
 
-tr:nth-child(even) {background-color: #2a2a2a;}
-tr:hover {font-weight: bolder;}
-
-th {
-  border: 1px solid #dddddd;
-  text-align: center;
-  padding: 10px;
-  font-family: 'Courier New', Courier, monospace;
-  font-weight:bold;
-  font-size: larger;
-  color:rgb(0, 245, 164);
-}
-
-td {
-  border: 1px solid #dddddd;
-  text-align: left;
-  padding: 10px;
-}
-
-</style>
-
-<link rel="stylesheet" type="css" href="/css/myCSS.css">
-
-<title>Assignment 4</title>
+  <title>Assignment 4</title>
 
 </head>
 
 <script src="csv.js"></script>
 
 <body>
-<h3><a href='../index.html'>Home</a></h3>
-<h3><a href='hw4.html'>Data</a></h3>
-<br>
-<h1>Percent of population living in cities of 1-5 million people</h1>
+  <h3><a href='../index.html'>Home</a></h3>
+  <h3><a href='hw4.html'>Data</a></h3>
+  <br>
+  <h1>Percent of population living in cities of 1-5 million people</h1>
 
-<table id="cityPop">
-  <tr>
-    <th>Country</th>
-    <th>1960</th>
-    <th>1980</th>
-    <th>2000</th>
-    <th>2020</th>
-  </tr>
-</table>
+  <table id="cityPop">
+    <tr>
+      <th>Country</th>
+      <th>1960</th>
+      <th>1980</th>
+      <th>2000</th>
+      <th>2020</th>
+    </tr>
+  </table>
 
-<script>
-var x = document.getElementById('cityPop')
-var length = csv.length
-for (var i =0; i<length; i++){
-    console.log('hello')
-    var newRow = document.createElement('tr');
-    var newCell1 = document.createElement('td');
-    var newCell2 = document.createElement('td');
-    var newCell3 = document.createElement('td');
-    var newCell4 = document.createElement('td');
-    var newCell5 = document.createElement('td');
+  <script>
+    var x = document.getElementById('cityPop')
+    var length = csv.length
+    for (var i =0; i<length; i++){
+        console.log('hello')
+        var newRow = document.createElement('tr');
+        var newCell1 = document.createElement('td');
+        var newCell2 = document.createElement('td');
+        var newCell3 = document.createElement('td');
+        var newCell4 = document.createElement('td');
+        var newCell5 = document.createElement('td');
 
-    newCell1.innerText = csv[i].COUNTRY;
-    newCell2.innerText = csv[i].sixty;
-    newCell3.innerText = csv[i].eighty;
-    newCell4.innerText = csv[i].naught;
-    newCell5.innerText = csv[i].twenty;
+        newCell1.innerText = csv[i].COUNTRY;
+        newCell2.innerText = csv[i].sixty;
+        newCell3.innerText = csv[i].eighty;
+        newCell4.innerText = csv[i].naught;
+        newCell5.innerText = csv[i].twenty;
 
-    if (csv[i].sixty == '0') {newCell2.style.backgroundColor = 'gray'}
-    if (csv[i].eighty == '0') {newCell3.style.backgroundColor = 'gray'}
-    if (csv[i].naught == '0') {newCell4.style.backgroundColor = 'gray'}
-    if (csv[i].twenty == '0') {newCell5.style.backgroundColor = 'gray'}
+        if (csv[i].sixty == '0') {newCell2.style.backgroundColor = 'gray'}
+        if (csv[i].eighty == '0') {newCell3.style.backgroundColor = 'gray'}
+        if (csv[i].naught == '0') {newCell4.style.backgroundColor = 'gray'}
+        if (csv[i].twenty == '0') {newCell5.style.backgroundColor = 'gray'}
 
-    if (csv[i].sixty > '0') {newCell2.style.backgroundColor = 'blue'}
-    if (csv[i].eighty > '0') {newCell3.style.backgroundColor = 'blue'}
-    if (csv[i].naught > '0') {newCell4.style.backgroundColor = 'blue'}
-    if (csv[i].twenty > '0') {newCell5.style.backgroundColor = 'blue'}
+        if (csv[i].sixty > '0') {newCell2.style.backgroundColor = 'blue'}
+        if (csv[i].eighty > '0') {newCell3.style.backgroundColor = 'blue'}
+        if (csv[i].naught > '0') {newCell4.style.backgroundColor = 'blue'}
+        if (csv[i].twenty > '0') {newCell5.style.backgroundColor = 'blue'}
 
-    if (csv[i].sixty > '25') {newCell2.style.backgroundColor = 'green'}
-    if (csv[i].eighty > '25') {newCell3.style.backgroundColor = 'green'}
-    if (csv[i].naught > '25') {newCell4.style.backgroundColor = 'green'}
-    if (csv[i].twenty > '25') {newCell5.style.backgroundColor = 'green'}
+        if (csv[i].sixty > '25') {newCell2.style.backgroundColor = 'green'}
+        if (csv[i].eighty > '25') {newCell3.style.backgroundColor = 'green'}
+        if (csv[i].naught > '25') {newCell4.style.backgroundColor = 'green'}
+        if (csv[i].twenty > '25') {newCell5.style.backgroundColor = 'green'}
 
-    if (csv[i].sixty > '50') {newCell2.style.backgroundColor = 'orange'}
-    if (csv[i].eighty > '50') {newCell3.style.backgroundColor = 'orange'}
-    if (csv[i].naught > '50') {newCell4.style.backgroundColor = 'orange'}
-    if (csv[i].twenty > '50') {newCell5.style.backgroundColor = 'orange'}
+        if (csv[i].sixty > '50') {newCell2.style.backgroundColor = 'orange'}
+        if (csv[i].eighty > '50') {newCell3.style.backgroundColor = 'orange'}
+        if (csv[i].naught > '50') {newCell4.style.backgroundColor = 'orange'}
+        if (csv[i].twenty > '50') {newCell5.style.backgroundColor = 'orange'}
 
-    newRow.append(newCell1)
-    newRow.append(newCell2)
-    newRow.append(newCell3)
-    newRow.append(newCell4)
-    newRow.append(newCell5)
-    x.append(newRow)
-}
-
-</script>
+        newRow.append(newCell1)
+        newRow.append(newCell2)
+        newRow.append(newCell3)
+        newRow.append(newCell4)
+        newRow.append(newCell5)
+        x.append(newRow)
+    }
+  </script>
 
 </body>
 
