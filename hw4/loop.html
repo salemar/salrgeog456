@@ -42,14 +42,27 @@ table {
   width: 100%;
   border-radius: 8px; 
   overflow: hidden; 
-  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
 }
 
-td, th {
+tr:nth-child(even) {background-color: #2a2a2a;}
+tr:hover {font-weight: bolder;}
+
+th {
+  border: 1px solid #dddddd;
+  text-align: center;
+  padding: 10px;
+  font-family: 'Courier New', Courier, monospace;
+  font-weight:bold;
+  font-size: larger;
+  color:rgb(0, 245, 164);
+}
+
+td {
   border: 1px solid #dddddd;
   text-align: left;
   padding: 10px;
 }
+
 </style>
 
 <title>Assignment 4</title>
@@ -91,6 +104,26 @@ for (var i =0; i<length; i++){
     newCell3.innerText = csv[i].eighty;
     newCell4.innerText = csv[i].naught;
     newCell5.innerText = csv[i].twenty;
+
+    if (csv[i].sixty == '0') {newCell2.style.backgroundColor = 'gray'}
+    if (csv[i].eighty == '0') {newCell3.style.backgroundColor = 'gray'}
+    if (csv[i].naught == '0') {newCell4.style.backgroundColor = 'gray'}
+    if (csv[i].twenty == '0') {newCell5.style.backgroundColor = 'gray'}
+
+    if (csv[i].sixty > '0') {newCell2.style.backgroundColor = 'blue'}
+    if (csv[i].eighty > '0') {newCell3.style.backgroundColor = 'blue'}
+    if (csv[i].naught > '0') {newCell4.style.backgroundColor = 'blue'}
+    if (csv[i].twenty > '0') {newCell5.style.backgroundColor = 'blue'}
+
+    if (csv[i].sixty > '25') {newCell2.style.backgroundColor = 'green'}
+    if (csv[i].eighty > '25') {newCell3.style.backgroundColor = 'green'}
+    if (csv[i].naught > '25') {newCell4.style.backgroundColor = 'green'}
+    if (csv[i].twenty > '25') {newCell5.style.backgroundColor = 'green'}
+
+    if (csv[i].sixty > '50') {newCell2.style.backgroundColor = 'orange'}
+    if (csv[i].eighty > '50') {newCell3.style.backgroundColor = 'orange'}
+    if (csv[i].naught > '50') {newCell4.style.backgroundColor = 'orange'}
+    if (csv[i].twenty > '50') {newCell5.style.backgroundColor = 'orange'}
 
     newRow.append(newCell1)
     newRow.append(newCell2)
