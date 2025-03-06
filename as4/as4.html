@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <style>
+    body {
+        background-color: black;
+    }
+    #text {width: 100%; position:static; right:100%;}
+        h1 {
+            font-family: 'Courier New', Courier, monospace;
+            color:rgb(0, 245, 164);
+            right: 70px;
+        }
+        h2 {
+            top: 25%;
+            font-family: 'Courier New', Courier, monospace;
+            color:rgb(161, 240, 214);
+            right: 70px;
+        }
+        h3 {
+            color:rgb(199, 253, 235);
+            font-family: monospace;
+            position:relative;
+            top:20px;
+            text-align: right
+        }
+        a {
+            cursor: cell;
+            position: relative;
+            text-align: center;
+            top: 25%;
+            font-family: 'Courier New', Courier, monospace;
+            color:rgb(161, 240, 214);
+        }
+    #map{width: 60%; height: 418px; float: left;}
+        .legend {
+                line-height: 18px;
+                color: #000;
+                background-color: #ffffff;
+        }
+        .legend i {
+            width: 18px;
+            height: 18px;
+            float: left;
+            margin-right: 8px;
+            opacity: 0.7; 
+        }
+    #info{width: 38%; height: 418px; float: right; display: flex; align-items: flex-end; background-color: rgb(65, 15, 94);}
+        .column {
+            width: 10%;
+            display: flex;
+            align-items: center; 
+            justify-content: center; 
+            background-color: gray;
+            border: 1px solid black;
+        }
+        table {
+            font-family: Tahoma, sans-serif;
+            color:white;
+            border-collapse: collapse;
+            width: 100%;
+            border-radius: 8px; 
+            overflow: auto; 
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+        }
+        td, th {
+            border: 1px solid #dddddd;
+            text-align: left;
+            padding: 3;
+            font-size: 10px;
+        }
+        tr:nth-child(even) {
+            background-color: #dddddd;
+        }
+        tr.selected {
+            background-color: yellow;
+        }
+    </style>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Assignment 5</title>
+
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.8.0/dist/leaflet.css" integrity="sha512-hoalWLoI8r4UszCkZ5kL8vayOGVae1oxXe/2A4AO6J9+580uKHDO3JdHb7NzwwzK5xr/Fs0W40kiNHxM9vyTtQ==" crossorigin="">
+    <script src="https://unpkg.com/leaflet@1.8.0/dist/leaflet.js" integrity="sha512-BB3hKbKWOc9Ez/TAwyWxNXeoV9c1v6FIeYiBieIWkpLjauysF18NzgR1MBNBXf8/KABdlkX68nAhlwcDFLGPCQ==" crossorigin=""></script>
+    <script src="../hw5/permap.js"></script>
+</head>
+
+<body>
+    <h3><a href='../index.html'>Home</a></h3>
+    <h3><a href='../hw4/hw4.html'>Data source</a></h3>
+    <div id="text">
+        <h1>Assessment 4:</h1>
+        <h1>% of population living in cities of 1-5 million people (2020)</h1>
+    </div>
+
+    <div id="map"></div>
+
+    <div id="info">
+        <table id="mytable">
+            <tr>
+            <th>Country</th>
+            <th>% living in large city</th>
+            </tr>
+        </table>
+    </div>
+
+<script>
+    var map = L.map('map').setView([30, 15], 2);
+        L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        maxZoom: 5,
+        attribution: '© OpenStreetMap'
+        }).addTo(map);
+        
+    var selectedYear = '2020'
+        function myStyle(feature) {
+            return {
+            "fillColor": getColor(feature.properties[selectedYear]),
+            "color": "black",
+            "weight": 0.75,
+            "opacity": 2.0,
+            "fillOpacity": 0.7
+            }
+        };
+    function getColor(percent) {
+        return percent < 1 ? "#dcdbde"
+        :percent < 5 ? "#eedcff"
+        :percent < 10 ? "#d9b1ff"
+        :percent < 20 ? "#c78cff" 
+        :percent < 30 ? "#b260ff" 
+        :percent < 40 ? "#a647ff" 
+        :percent < 50 ? "#9626ff"
+        :percent < 60 ? "#8300ff" 
+        :percent < 70 ? "#5f01c4" 
+        :percent < 100 ? "#3d027d" 
+        : "#adadad";
+    };
+    var cityPop = L.geoJSON(per, {style: myStyle}).addTo(map);
+
+    var legend = L.control({position:'bottomleft'});
+        legend.onAdd = function (map) {
+            var div = L.DomUtil.create('div', 'info legend'),
+            grades =[1, 5, 10, 20, 30, 40, 50, 60, 70],
+            labels = [];
+        for (var i= 0; i < grades.length; i++) {
+            div.innerHTML +=
+            '<i style="background:' + getColor(grades[i] + 1) + '"></i> ' +
+                    grades[i] + (grades[i + 1] ? '&ndash;' + grades[i + 1] + '%'+ '<br>' : '%+');
+            }
+            return div;        
+        };
+    legend.addTo(map);
+
+////////////////////////////////////////////////////////////////////
+
+    function onEachFeature(feature, layer) {
+    layer.on({mouseover: addInformation})
+    }
+
+    var information = document.getElementById('info')
+
+    function featureArrayObj(per){
+        var sixty = {name: '1960', value: per.features.properties[1960]}
+        var seventy = {name: '1970', value: per.features.properties[1970]}
+        var eighty = {name: '1980', value: per.features.properties[1980]}
+        var ninety = {name: '1990', value: per.features.properties[1990]}
+        var naught = {name: '2000', value: per.features.properties[2000]}
+        var twenty = {name: '2020', value: per.features.properties[2020]}
+        var array = [sixty,seventy,eighty,ninety,naught,twenty]
+            return array
+    }
+    
+    var geoJson = L.geoJson(per, {
+        style: style,
+        onEachFeature: onEachFeature
+    }).addTo(map);
+
+    function selectColorByValue(value){
+        if (value > 25) {return 'green'}
+        if (value > 0) {return 'white'}
+    }
+
+    function addColumn(obj){
+        var columnDiv = document.createElement("div");
+        columnDiv.className = "column";
+        columnDiv.style.backgroundColor = selectColorByValue(obj.value);
+        columnDiv.style.height = (obj.value*2) + 'px'
+        columnDiv.innerHTML = obj.name + ' <br/>' + obj.value
+        information.append(columnDiv);
+    }
+
+    function addInformation(e) {
+        information.innerHTML = '';
+        var newArray = featureArrayObj (e.target.feature)
+        newArray.forEach(e =>addColumn(e))
+    }
+</script>
+
+</body>
+
+</html>
