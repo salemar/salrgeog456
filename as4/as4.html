@@ -142,13 +142,13 @@
 
     var information = document.getElementById('info')
 
-    function featureArrayObj(per){
-        var sixty = {name: '1960', value: per.features.properties[1960]}
-        var seventy = {name: '1970', value: per.features.properties[1970]}
-        var eighty = {name: '1980', value: per.features.properties[1980]}
-        var ninety = {name: '1990', value: per.features.properties[1990]}
-        var naught = {name: '2000', value: per.features.properties[2000]}
-        var twenty = {name: '2020', value: per.features.properties[2020]}
+    function featureArrayObj(feature){
+        var sixty = {name: '1960', value: feature.properties['1960']}
+        var seventy = {name: '1970', value: feature.properties['1970']}
+        var eighty = {name: '1980', value: feature.properties['1980']}
+        var ninety = {name: '1990', value: feature.properties['1990']}
+        var naught = {name: '2000', value: feature.properties['2000']}
+        var twenty = {name: '2020', value: feature.properties['2020']}
         var array = [sixty,seventy,eighty,ninety,naught,twenty]
             return array
     }
@@ -167,7 +167,7 @@
         var columnDiv = document.createElement("div");
         columnDiv.className = "column";
         columnDiv.style.backgroundColor = selectColorByValue(obj.value);
-        columnDiv.style.height = (obj.value*2) + 'px'
+        columnDiv.style.height = (obj.value*10) + 'px'
         columnDiv.innerHTML = obj.name + ' <br/>' + obj.value
         information.append(columnDiv);
     }
