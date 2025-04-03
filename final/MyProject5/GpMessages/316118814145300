@@ -1,0 +1,3 @@
+﻿<?xml version="1.0" encoding="utf-8"?><messages><msg code="0" type="2">Start Time: Wednesday, April 2, 2025 8:26:57 PM</msg><msg code="1558" type="100">ERROR 001558: Error parsing json file 'C:\Users\salr\OneDrive - University of North Carolina at Chapel Hill\Documents\geog456\final\code\manEmpl.json'. Expected to find comma, colon or start of array; state : Empty; buffer : var employ = {
+    "type": "FeatureCollection",
+  </msg><msg code="-2147467259" type="100">Failed to execute (JSONToFeatures).</msg><msg code="0" type="3">Failed at Wednesday, April 2, 2025 8:27:02 PM (Elapsed Time: 4.58 seconds)</msg></messages>
