@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <style>
+        body {
+        background-color: black;
+    }
+    #text { width: 300px; position:fixed; right: 70px}
+    h1 {
+        font-family: 'Courier New', Courier, monospace;
+        color:rgb(0, 245, 164);
+        right: 70px;
+    }
+    h2 {
+        top: 25%;
+        font-family: 'Courier New', Courier, monospace;
+        color:rgb(161, 240, 214);
+        right: 70px;
+    }
+    h3 {
+                color:rgb(199, 253, 235);
+                font-family: monospace;
+                position:relative;
+                top:20px;
+                text-align: right
+                        }
+    a {
+        cursor: cell;
+        position: relative;
+        text-align: center;
+        top: 25%;
+        font-family: 'Courier New', Courier, monospace;
+        color:rgb(161, 240, 214);
+    }
+    #map{width: 850px; height: 600px; float: left;}
+
+    .legend {
+            line-height: 18px;
+            color: #000;
+            background-color: #ffffff;
+        }
+    .legend i {
+        width: 18px;
+        height: 18px;
+        float: left;
+        margin-right: 8px;
+        opacity: 0.7; 
+    }
+    </style>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Final Project: Highways</title>
+
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.8.0/dist/leaflet.css" integrity="sha512-hoalWLoI8r4UszCkZ5kL8vayOGVae1oxXe/2A4AO6J9+580uKHDO3JdHb7NzwwzK5xr/Fs0W40kiNHxM9vyTtQ==" crossorigin="">
+    <script src="https://unpkg.com/leaflet@1.8.0/dist/leaflet.js" integrity="sha512-BB3hKbKWOc9Ez/TAwyWxNXeoV9c1v6FIeYiBieIWkpLjauysF18NzgR1MBNBXf8/KABdlkX68nAhlwcDFLGPCQ==" crossorigin=""></script>
+    <script src="hwy2004.js"></script>
+    <script src="hwy2005.js"></script>
+    <script src="hwy2006.js"></script>
+    <script src="hwy2007.js"></script>
+    <script src="hwy2008.js"></script>
+    <script src="hwy2009.js"></script>
+    <script src="hwy2010.js"></script>
+    <script src="hwy2011.js"></script>
+    <script src="hwy2012.js"></script>
+    <script src="hwy2013.js"></script>
+    <script src="hwy2014.js"></script>
+    <script src="hwy2015.js"></script>
+    <script src="hwy2016.js"></script>
+    <script src="hwy2017.js"></script>
+    <script src="hwy2018.js"></script>
+    <script src="hwy2019.js"></script>
+    <script src="hwy2020.js"></script>
+    <script src="hwy2021.js"></script>
+</head>
+
+<body>
+    <h3><a href='../index.html'>Home</a></h3>
+    <!-- <h3><a href='../hw4/hw4.html'>Data source</a></h3><br> -->
+    <div id="text">
+        <h1>Final Project:</h1>
+        <h2>Highway investment by state</h2>
+        <h2 id="theYear">Year</h2>
+        <input type="range" name="year" value="2004" min="2004" max="2021" step="1" oninput="moveSlider(this.value)">
+    </div>
+
+    <div id="map"></div>
+
+    <script>
+        var map = L.map('map').setView([30, 15], 2);
+            L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            maxZoom: 5,
+            attribution: '© OpenStreetMap'
+            }).addTo(map);
+        var selectedYear = '2004'
+            function myStyle(feature) {
+                return {
+                "fillColor": getColor(feature.properties[selectedYear]),
+                "color": "black",
+                "weight": 0.75,
+                "opacity": 2.0,
+                "fillOpacity": 0.7
+                }};
+        var data = [ofour,ofive,osix,oseven,oeight,onine,ten,eleven,twelve,thirteen,fourteen,fifteen,sixteen,seventeen,eighteen,nineteen,twenty,twentyone] // array ordering the data. You need to be very careful with this method as you are bringing in all the data at once. 
+        var order = ['2004','2005','2006','2007','2008','2009','2010','2011','2012','2013','2014','2015','2016','2017','2018','2019','2020','2021'] // an array with the date of each data source
+
+        function getColor(amt) {
+            return amt < 413 ? "#dcdbde"
+            :amt < 558 ? "#660000"
+            :amt < 703 ? "#663300"
+            :amt < 848 ? "#666600" 
+            :amt < 992 ? "#669900" 
+            : "#adadad";
+        };
+        var highways = L.geoJSON(data, {style: myStyle}).addTo(map);
+        function moveSlider(value) {
+            selectedYear = value; 
+            map.removeLayer(highways);
+            highways = L.geoJSON(data, {style: myStyle});
+            map.addLayer(highways);
+            document.getElementById('theYear').innerHTML = 'Year: '
+    
+        }
+        moveSlider('2004')
+    
+        var legend = L.control({position:'bottomleft'});
+            legend.onAdd = function (map) {
+                var div = L.DomUtil.create('div', 'info legend'),
+                grades =[415, 558, 703, 848, 992],
+                labels = [];
+            for (var i= 0; i < grades.length; i++) {
+                div.innerHTML +=
+                '<i style="background:' + getColor(grades[i] + 1) + '"></i> ' +
+                        grades[i] + (grades[i + 1] ? '&ndash;' : ',000,000');
+                }
+                return div;        
+            };
+        legend.addTo(map);
+    </script>
+
+</body>
+
+</html>
