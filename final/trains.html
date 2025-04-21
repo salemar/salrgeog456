@@ -101,30 +101,11 @@
         <input type="range" name="year" value="38" min="0" max="56" step="1" oninput="moveSlider(this.value)">
     </div>
 
+<!-- legend -->
+
+
 <!-- map -->
     <div id="map"></div>
-
-<!-- legend -->
-    dt {
-        width: 40px;
-        height: 40px;
-        display: inline-block;
-        overflow: hidden;
-        border: 1px solid #000;
-        }
-
-    .one {background-color: "E0AAFF"}
-
-    dd {
-        display: inline-block;
-        width: 15em;
-        margin: 0 0 0 1em;
-        }
-
-        <dl>
-            <dt class="one">413-558</dt>
-            <dd>T. bicolor range</dd>
-        </dl>
 
 <script>    
     window.onload = function() {
@@ -288,17 +269,17 @@
         clearInterval(animationInterval);}
     
     // legend
-        // var legend = L.control({position:'bottomleft'});
-        //     legend.onAdd = function (map) {
-        //         var div = L.DomUtil.create('div', 'info legend'),
-        //         grades =[415, 558, 703, 848, 992],
-        //         labels = [];
-        //     for (var i= 0; i < grades.length; i++) {
-        //         div.innerHTML +=
-        //         '<i style="background:' + getColor(grades[i] + 1) + '"></i> ' +
-        //                 grades[i] + (grades[i + 1] ? '&ndash;' : ',000,000');}
-        //         return div;};
-        // legend.addTo(map);
+        var legend = L.control({position:'bottomleft'});
+            legend.onAdd = function (map) {
+                var div = L.DomUtil.create('div', 'info legend'),
+                grades =[415, 558, 703, 848, 992],
+                labels = [];
+            for (var i= 0; i < grades.length; i++) {
+                div.innerHTML +=
+                '<i style="background:' + getColor(grades[i] + 1) + '"></i> ' +
+                        grades[i] + (grades[i + 1] ? '&ndash;' : ',000,000');}
+                return div;};
+            legend.addTo(map);
 
     </script>
 
