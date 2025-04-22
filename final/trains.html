@@ -1,29 +1,38 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <style>
         body {
-            background-color: black;}
+            background-color: black;
+        }
 
-        #text { width: 300px; position:fixed; right: 70px}
+        #text {
+            width: 300px;
+            position: fixed;
+            right: 70px
+        }
 
         h1 {
             font-family: 'Courier New', Courier, monospace;
-            color:rgb(0, 245, 164);
-            right: 70px;}
+            color: rgb(0, 245, 164);
+            right: 70px;
+        }
 
         h2 {
             top: 25%;
             font-family: 'Courier New', Courier, monospace;
-            color:rgb(161, 240, 214);
-            right: 70px;}
+            color: rgb(161, 240, 214);
+            right: 70px;
+        }
 
         h3 {
-                    color:rgb(199, 253, 235);
-                    font-family: monospace;
-                    position:relative;
-                    top:20px;
-                    text-align: right}
+            color: rgb(199, 253, 235);
+            font-family: monospace;
+            position: relative;
+            top: 20px;
+            text-align: right
+        }
 
         a {
             cursor: cell;
@@ -31,46 +40,60 @@
             text-align: center;
             top: 25%;
             font-family: 'Courier New', Courier, monospace;
-            color:rgb(161, 240, 214);}
+            color: rgb(161, 240, 214);
+        }
 
-    /* map div */
-        #map{width: 850px; height: 600px; float: left; font-family: monospace;}
+        /* map div */
+        #map {
+            width: 850px;
+            height: 600px;
+            float: left;
+            font-family: monospace;
+        }
 
-    /* play button */
+        /* play button */
         .play-control {
             padding: 5px;
             background: white;
             border-radius: 5px;
-            box-shadow: 0 0 5px rgba(0,0,0,0.3);}
+            box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
+        }
 
         .play-control button {
             border: none;
             background: none;
             cursor: cell;
             font-size: 14px;
-            font-family: monospace;}
+            font-family: monospace;
+        }
 
-    /* legend */
+        /* legend */
         .legend {
-                line-height: 18px;
-                color: #000;
-                background-color: #ffffff;
-                font-family: monospace;}
+            line-height: 18px;
+            color: #000;
+            background-color: #ffffff;
+            font-family: monospace;
+        }
 
         .legend i {
             width: 18px;
             height: 18px;
             float: left;
             margin-right: 8px;
-            opacity: 0.7;}
+            opacity: 0.7;
+        }
     </style>
 
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Final Project</title>
+    <title>Passenger Rail Closures</title>
 
-    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.8.0/dist/leaflet.css" integrity="sha512-hoalWLoI8r4UszCkZ5kL8vayOGVae1oxXe/2A4AO6J9+580uKHDO3JdHb7NzwwzK5xr/Fs0W40kiNHxM9vyTtQ==" crossorigin="">
-    <script src="https://unpkg.com/leaflet@1.8.0/dist/leaflet.js" integrity="sha512-BB3hKbKWOc9Ez/TAwyWxNXeoV9c1v6FIeYiBieIWkpLjauysF18NzgR1MBNBXf8/KABdlkX68nAhlwcDFLGPCQ==" crossorigin=""></script>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.8.0/dist/leaflet.css"
+        integrity="sha512-hoalWLoI8r4UszCkZ5kL8vayOGVae1oxXe/2A4AO6J9+580uKHDO3JdHb7NzwwzK5xr/Fs0W40kiNHxM9vyTtQ=="
+        crossorigin="">
+    <script src="https://unpkg.com/leaflet@1.8.0/dist/leaflet.js"
+        integrity="sha512-BB3hKbKWOc9Ez/TAwyWxNXeoV9c1v6FIeYiBieIWkpLjauysF18NzgR1MBNBXf8/KABdlkX68nAhlwcDFLGPCQ=="
+        crossorigin=""></script>
     <script src="hwy2004.js"></script>
     <script src="hwy2005.js"></script>
     <script src="hwy2006.js"></script>
@@ -93,195 +116,220 @@
 </head>
 
 <body>
-<!-- header -->
+    <!-- header -->
     <div id="text">
-        <h1>Final Project:</h1>
-        <h2>Amtrak Stations and Highway Investment</h2>
+        <h1>Amtrak Stations (1971-2021)</h1>
+        <h2>and State Highway Investment Per Capita (2004-2021)</h2>
         <h2 id="theYear">Year:</h2>
-        <input type="range" name="year" value="38" min="0" max="56" step="1" oninput="moveSlider(this.value)">
+        <input type="range" name="year" value="32" min="0" max="50" step="1" oninput="moveSlider(this.value)">
     </div>
 
-<!-- legend -->
+    <!-- legend -->
 
 
-<!-- map -->
+    <!-- map -->
     <div id="map"></div>
 
-<script>    
-    window.onload = function() {
-        document.querySelector('input[name="year"]').value = 39; 
-        moveSlider(39);
-        addPlayButton();};
-        
-    //map
+    <script>
+        window.onload = function () {
+            document.querySelector('input[name="year"]').value = 33;
+            moveSlider(33);
+            addPlayButton();
+        };
+
+        //map
         var map = L.map('map').setView([40, -98], 3.5);
-            L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png', {
+        L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png', {
             attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>',
             subdomains: 'abcd',
             maxZoom: 9,
             minZoom: 3,
-            }).addTo(map); 
+        }).addTo(map);
 
-    // highways
+        // highways
         var selectedYear = '2004'
-            function myStyle(feature) {
-                return {
+        function myStyle(feature) {
+            return {
                 "fillColor": getColor(feature.properties['hwySpend']),
                 "weight": 0.00,
-                "fillOpacity": 0.7}};
+                "fillOpacity": 0.7
+            }
+        };
 
-        var data = [ofour,ofive,osix,oseven,oeight,onine,ten,eleven,twelve,thirteen,fourteen,fifteen,sixteen,seventeen,eighteen,nineteen,twenty,twentyone] // array ordering the data. You need to be very careful with this method as you are bringing in all the data at once. 
-        var order = ['2004','2005','2006','2007','2008','2009','2010','2011','2012','2013','2014','2015','2016','2017','2018','2019','2020','2021'] // an array with the date of each data source
+        var data = [ofour, ofive, osix, oseven, oeight, onine, ten, eleven, twelve, thirteen, fourteen, fifteen, sixteen, seventeen, eighteen, nineteen, twenty, twentyone] // array ordering the data. You need to be very careful with this method as you are bringing in all the data at once. 
+        var order = ['2004', '2005', '2006', '2007', '2008', '2009', '2010', '2011', '2012', '2013', '2014', '2015', '2016', '2017', '2018', '2019', '2020', '2021'] // an array with the date of each data source
 
         function getColor(amt) {
             return amt < 413 ? "00000"
-            :amt < 558 ? "#E0AAFF"
-            :amt < 703 ? "#C77DFF"
-            :amt < 848 ? "#9D4EDD" 
-            :amt < 992 ? "#7B2CBF" 
-            : "00000";}
+                : amt < 558 ? "#E0AAFF"
+                    : amt < 703 ? "#C77DFF"
+                        : amt < 848 ? "#9D4EDD"
+                            : amt < 992 ? "#7B2CBF"
+                                : "00000";
+        }
 
-        var highways = L.geoJSON(data, {style: myStyle});
+        var highways = L.geoJSON(data, { style: myStyle });
 
-    //station categorization
+        //station categorization (code written by Deepseek)
         function getStationStatus(feature, currentYear) {
             const openedYear = feature.properties.Opened;
             const closedYear = feature.properties.Closed;
-            
-            const yearNum = parseInt(currentYear);
-            
-        // 1. First check for UNOPENED status (has opened date and year is before it)
-            if (openedYear && parseInt(openedYear) > yearNum) {
-                return "UNOPENED";}
-            
-        // 2. Handle stations with unknown opened date
-            if (!openedYear || openedYear === "") {
-                
-        // If no opened date, treat as OPEN unless closed date has passed
-                if (closedYear && parseInt(closedYear) < yearNum) {
-                    return "CLOSED";}
-                return "OPEN";}
-            
-        // 3. Normal case - has opened date and year is after it
-            const isNotClosed = !closedYear || closedYear === "" || parseInt(closedYear) >= yearNum;
-            
-            return isNotClosed ? "OPEN" : "CLOSED";}
 
-    //station styling
+            const yearNum = parseInt(currentYear);
+
+            // 1. First check for UNOPENED status (has opened date and year is before it)
+            if (openedYear && parseInt(openedYear) > yearNum) {
+                return "UNOPENED";
+            }
+
+            // 2. Handle stations with unknown opened date
+            if (!openedYear || openedYear === "") {
+
+                // If no opened date, treat as OPEN unless closed date has passed
+                if (closedYear && parseInt(closedYear) < yearNum) {
+                    return "CLOSED";
+                }
+                return "OPEN";
+            }
+
+            // 3. Normal case - has opened date and year is after it
+            const isNotClosed = !closedYear || closedYear === "" || parseInt(closedYear) >= yearNum;
+
+            return isNotClosed ? "OPEN" : "CLOSED";
+        }
+
+        //station styling (code initially written by Deepseek and modified)
         var icon = L.geoJSON(stations, {
             pointToLayer: function (feature, latlng) {
                 const status = getStationStatus(feature, selectedYear);
                 var style = {
                     radius: status === "OPEN" ? 5 : 3,
-                    fillColor: status === "OPEN" ? "#1efff3" : 
-                            status === "CLOSED" ? "#6e7b7a" : "#000000",
-                    color: "#e3f6f5",
-                    weight: status === "OPEN" ? 1.5 :
-                        status === "CLOSED" ? 0 : 0,
-                    opacity: 0.4,
-                    fillOpacity: status === "UNOPENED" ? 0 : 0.8};
-
-                return L.circleMarker(latlng, style).bindPopup(
-                    `${feature.properties.Code}: ${status}<br>
-                    ${status === "UNOPENED" ? 
-                    `Will open in ${feature.properties.Opened}` : 
-                    `Operated ${feature.properties.Opened || 'unknown'}-${feature.properties.Closed || 'present'}`}
-                    ${!feature.properties.Opened ? '<br><em>Opened date unknown</em>' : ''}`);}});
-
-    //slider
-        function moveSlider(value) {
-        
-        selectedYear = 1965 + parseInt(value); 
-        
-        document.getElementById('theYear').innerHTML = 'Year: ' + selectedYear;
-        
-        map.removeLayer(highways);
-        map.removeLayer(icon);
-        
-        if (selectedYear >= 2004 && selectedYear <= 2021) {
-            highways = L.geoJSON(data[selectedYear - 2004], {style: myStyle});
-            map.addLayer(highways);}
-        
-        icon = L.geoJSON(stations, {
-            pointToLayer: function (feature, latlng) {
-                const status = getStationStatus(feature, selectedYear.toString());
-                var style = {
-                    radius: status === "OPEN" ? 5 : 3,
-                    fillColor: status === "OPEN" ? "#1efff3" : 
+                    fillColor: status === "OPEN" ? "#1efff3" :
                         status === "CLOSED" ? "#6e7b7a" : "#000000",
                     color: "#e3f6f5",
                     weight: status === "OPEN" ? 1.5 :
                         status === "CLOSED" ? 0 : 0,
-                    opacity: 0.5,
-                    fillOpacity: status === "UNOPENED" ? 0 : 0.8};
+                    opacity: 0.4,
+                    fillOpacity: status === "UNOPENED" ? 0 : 0.8
+                };
+
                 return L.circleMarker(latlng, style).bindPopup(
                     `${feature.properties.Code}: ${status}<br>
-                    ${status === "UNOPENED" ? 
-                    `Will open in ${feature.properties.Opened}` : 
-                    `Operated ${feature.properties.Opened || 'unknown'}-${feature.properties.Closed || 'present'}`}`);}});
-        
-        map.addLayer(icon);}
+                    ${status === "UNOPENED" ?
+                        `Will open in ${feature.properties.Opened}` :
+                        `Operated ${feature.properties.Opened || 'unknown'}-${feature.properties.Closed || 'present'}`}
+                    ${!feature.properties.Opened ? '<br><em>Opened date unknown</em>' : ''}`);
+            }
+        });
+
+        //slider
+        function moveSlider(value) {
+
+            selectedYear = 1971 + parseInt(value);
+
+            document.getElementById('theYear').innerHTML = 'Year: ' + selectedYear;
+
+            map.removeLayer(highways);
+            map.removeLayer(icon);
+
+            if (selectedYear >= 2004 && selectedYear <= 2021) {
+                highways = L.geoJSON(data[selectedYear - 2004], { style: myStyle });
+                map.addLayer(highways);
+            }
+
+            icon = L.geoJSON(stations, {
+                pointToLayer: function (feature, latlng) {
+                    const status = getStationStatus(feature, selectedYear.toString());
+                    var style = {
+                        radius: status === "OPEN" ? 5 : 3,
+                        fillColor: status === "OPEN" ? "#1efff3" :
+                            status === "CLOSED" ? "#6e7b7a" : "#000000",
+                        color: "#e3f6f5",
+                        weight: status === "OPEN" ? 1.5 :
+                            status === "CLOSED" ? 0 : 0,
+                        opacity: 0.5,
+                        fillOpacity: status === "UNOPENED" ? 0 : 0.8
+                    };
+                    return L.circleMarker(latlng, style).bindPopup(
+                        `${feature.properties.Code}: ${status}<br>
+                    ${status === "UNOPENED" ?
+                            `Will open in ${feature.properties.Opened}` :
+                            `Operated ${feature.properties.Opened || 'unknown'}-${feature.properties.Closed || 'present'}`}`);
+                }
+            });
+
+            map.addLayer(icon);
+        }
 
         moveSlider('0')
 
-    //play button
+        //play button
         var animationInterval;
         var isPlaying = false;
 
         function addPlayButton() {
-        var playControl = L.control({position: 'topright'});
-        
-        playControl.onAdd = function(map) {
-            var div = L.DomUtil.create('div', 'play-control');
-            div.innerHTML = '<button id="playButton">▶ Play</button>';
-            return div;};
-        
-        playControl.addTo(map);
-        
-        document.getElementById('playButton').addEventListener('click', function() {
-            if (isPlaying) {
-            pauseAnimation();
-            } else {
-            playAnimation();}});}
+            var playControl = L.control({ position: 'topright' });
+
+            playControl.onAdd = function (map) {
+                var div = L.DomUtil.create('div', 'play-control');
+                div.innerHTML = '<button id="playButton">▶ Play</button>';
+                return div;
+            };
+
+            playControl.addTo(map);
+
+            document.getElementById('playButton').addEventListener('click', function () {
+                if (isPlaying) {
+                    pauseAnimation();
+                } else {
+                    playAnimation();
+                }
+            });
+        }
 
         function playAnimation() {
-        var playButton = document.getElementById('playButton');
-        playButton.textContent = '⏸ Pause';
-        isPlaying = true;
-        
-        var currentValue = parseInt(document.querySelector('input[name="year"]').value);
-        var maxValue = parseInt(document.querySelector('input[name="year"]').max);
-        
-        animationInterval = setInterval(function() {
-            currentValue++;
-            
-            if (currentValue > maxValue) {
-            currentValue = 0;}
-            
-            document.querySelector('input[name="year"]').value = currentValue;
-            moveSlider(currentValue); 
-        }, 700);}
+            var playButton = document.getElementById('playButton');
+            playButton.textContent = '⏸ Pause';
+            isPlaying = true;
+
+            var currentValue = parseInt(document.querySelector('input[name="year"]').value);
+            var maxValue = parseInt(document.querySelector('input[name="year"]').max);
+
+            animationInterval = setInterval(function () {
+                currentValue++;
+
+                if (currentValue > maxValue) {
+                    currentValue = 0;
+                }
+
+                document.querySelector('input[name="year"]').value = currentValue;
+                moveSlider(currentValue);
+            }, 700);
+        }
 
         function pauseAnimation() {
-        var playButton = document.getElementById('playButton');
-        playButton.textContent = '▶ Play';
-        isPlaying = false;
-        clearInterval(animationInterval);}
-    
-    // legend
-        var legend = L.control({position:'bottomleft'});
-            legend.onAdd = function (map) {
-                var div = L.DomUtil.create('div', 'info legend'),
-                grades =[415, 558, 703, 848, 992],
-                labels = [];
-            for (var i= 0; i < grades.length; i++) {
-                div.innerHTML +=
-                '<i style="background:' + getColor(grades[i] + 1) + '"></i> ' +
-                        grades[i] + (grades[i + 1] ? '&ndash;' : ',000,000');}
-                return div;};
-            legend.addTo(map);
+            var playButton = document.getElementById('playButton');
+            playButton.textContent = '▶ Play';
+            isPlaying = false;
+            clearInterval(animationInterval);
+        }
 
-</script>
+        // legend
+        var legendH = L.control({ position: 'bottomleft' });
+        legendH.onAdd = function (map) {
+            var divH = L.DomUtil.create('divH', 'info legend'),
+                gradesH = [415, 558, 703, 848],
+                labelsH = ['<strong>Highway Expenditure</strong>'];
+            for (var i = 0; i < gradesH.length; i++) {
+                divH.innerHTML +=
+                    '<i style="background:' + getColor(gradesH[i] + 1) + '"></i> ' +
+                    gradesH[i] + (gradesH[i + 1] ? ' - ' + gradesH[i + 1] + '<br>' : ' - 992 per 1,000');
+            }
+            return divH;
+        };
+        legendH.addTo(map);
+    </script>
 
 </body>
+
 </html>
