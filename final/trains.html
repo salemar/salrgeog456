@@ -173,7 +173,7 @@
             //prompt: "write a javascript function to categorize 'stations' as OPEN if (feature.properties.Opened) <= theYear,
                 //and CLOSED if (feature.properties.Closed) >= theYear"
             //prompt: "add a new category, UNOPENED, for stations prior to their Opened date, which are displayed with a fillOpacity of 0"
-        // data compiled from Wikipedia datasets
+        // data compiled from Wikipedia datasets and https://www.bts.gov/ntad
         function getStationStatus(feature, currentYear) {
             const openedYear = feature.properties.Opened;
             const closedYear = feature.properties.Closed;
