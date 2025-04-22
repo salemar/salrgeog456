@@ -3,76 +3,118 @@
 
 <head>
     <style>
+        /* Base Styles */
         body {
-            background-color: black;
+            background-color: #0a192f;
+            /* Dark navy blue */
+            color: #e6f1ff;
+            /* Light blue text */
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 0;
+            height: 100vh;
+            overflow: hidden;
         }
 
+        /* Layout */
         #text {
-            width: 300px;
+            width: 250px;
             position: fixed;
-            right: 70px
+            right: 40px;
+            top: 80px;
+            background: rgba(10, 25, 47, 0.85);
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+            backdrop-filter: blur(5px);
+            z-index: 1000;
         }
 
+        #map {
+            width: calc(100% - 340px);
+            height: 100vh;
+            float: left;
+        }
+
+        /* Typography */
         h1 {
-            font-family: 'Courier New', Courier, monospace;
-            color: rgb(0, 245, 164);
-            right: 70px;
+            font-family: 'Courier New', monospace;
+            color: #64ffda;
+            /* Teal accent */
+            margin: 0 0 10px 0;
+            font-size: 1.8rem;
+            font-weight: 600;
         }
 
         h2 {
-            top: 25%;
-            font-family: 'Courier New', Courier, monospace;
-            color: rgb(161, 240, 214);
-            right: 70px;
+            color: #ccd6f6;
+            /* Light blue */
+            margin: 0 0 15px 0;
+            font-size: 1.2rem;
+            font-weight: 400;
+            line-height: 1.5;
         }
 
         h3 {
-            color: rgb(199, 253, 235);
+            color: #8892b0;
+            /* Medium blue */
             font-family: monospace;
             position: relative;
             top: 20px;
-            text-align: right
+            text-align: right;
+            margin-right: 20px;
         }
 
+        /* Links */
         a {
-            cursor: cell;
-            position: relative;
-            text-align: center;
-            top: 25%;
-            font-family: 'Courier New', Courier, monospace;
-            color: rgb(161, 240, 214);
+            cursor: pointer;
+            color: #64ffda !important;
+            /* Teal accent */
+            text-decoration: none;
+            transition: all 0.3s ease;
+            font-family: 'Courier New', monospace;
         }
 
-        /* map div */
-        #map {
-            width: 850px;
-            height: 600px;
-            float: left;
-            font-family: monospace;
+        a:hover {
+            color: #a8b2d1 !important;
+            text-decoration: underline;
         }
-        
-        /* play button */
-        .play-control {
-            padding: 5px;
-            background: white;
+
+        /* Slider */
+        input[type="range"] {
+            width: 100%;
+            height: 8px;
+            margin: 15px 0;
+            background: #112240;
             border-radius: 5px;
-            box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
+            outline: none;
+            -webkit-appearance: none;
         }
 
-        .play-control button {
-            border: none;
-            background: none;
-            cursor: cell;
-            font-size: 14px;
-            font-family: monospace;
+        input[type="range"]::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            width: 18px;
+            height: 18px;
+            background: #64ffda;
+            border-radius: 50%;
+            cursor: pointer;
+            transition: all 0.2s ease;
         }
 
-        /* legend */
+        input[type="range"]::-webkit-slider-thumb:hover {
+            transform: scale(1.2);
+            background: #88ffdd;
+        }
+
+        /* Legend */
         .legend {
             line-height: 18px;
-            color: #000;
-            background-color: #ffffff;
-            font-family: monospace;
+            color: #64ffda;
+            background: rgba(10, 25, 47, 0.9);
+            padding: 12px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+            font-family: 'Segoe UI', sans-serif;
         }
 
         .legend i {
@@ -80,7 +122,63 @@
             height: 18px;
             float: left;
             margin-right: 8px;
-            opacity: 0.7;
+            opacity: 0.9;
+            border-radius: 3px;
+        }
+
+        /* Play Button */
+        .play-control {
+            padding: 8px 12px;
+            background: rgba(10, 25, 47, 0.9);
+            border-radius: 6px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+            backdrop-filter: blur(2px);
+        }
+
+        .play-control button {
+            border: none;
+            background: transparent;
+            color: #64ffda;
+            cursor: pointer;
+            font-size: 14px;
+            font-family: 'Courier New', monospace;
+            padding: 4px 8px;
+            border-radius: 4px;
+            transition: all 0.3s ease;
+        }
+
+        .play-control button:hover {
+            background: rgba(100, 255, 218, 0.1);
+        }
+
+        /* Station Popups */
+        .leaflet-popup-content {
+            font-family: 'Segoe UI', sans-serif;
+            font-size: 14px;
+            color: #0a192f;
+        }
+
+        .leaflet-popup-content-wrapper {
+            border-radius: 8px !important;
+            background: rgba(10, 25, 47, 0.9);
+            box-shadow: 0 3px 14px rgba(0, 0, 0, 0.2) !important;
+        }
+
+        /* Responsive Adjustments */
+        @media (max-width: 768px) {
+            #text {
+                width: calc(100% - 40px);
+                position: relative;
+                right: auto;
+                margin: 20px;
+                background: rgba(10, 25, 47, 0.9);
+            }
+
+            #map {
+                width: 100%;
+                height: calc(100vh - 200px);
+                
+            }
         }
     </style>
 
@@ -116,15 +214,15 @@
 </head>
 
 <body>
-<!-- header -->
+    <!-- header -->
     <div id="text">
         <h1>Amtrak Stations (1971-2021)</h1>
         <h2>and State Highway Investment Per Capita (2004-2021)</h2>
         <h2 id="theYear">Year:</h2>
         <input type="range" name="year" value="32" min="0" max="50" step="1" oninput="moveSlider(this.value)">
-        </div>
+    </div>
 
-<!-- map -->
+    <!-- map -->
     <div id="map"></div>
 
     <script>
@@ -134,7 +232,7 @@
             addPlayButton();
         };
 
-    //map
+        //map
         var map = L.map('map').setView([40, -98], 3.5);
         L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png', {
             attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>',
@@ -143,7 +241,7 @@
             minZoom: 3,
         }).addTo(map);
 
-    // highways
+        // highways
         // data extrapolated from https://www.cbo.gov/publication/60874 and other CBO datasets refrenced in linked report
         var selectedYear = '2004'
         function myStyle(feature) {
@@ -154,7 +252,7 @@
             }
         };
 
-        var data = [ofour, ofive, osix, oseven, oeight, onine, ten, eleven, twelve, thirteen, fourteen, fifteen, sixteen, seventeen, eighteen, nineteen, twenty, twentyone] 
+        var data = [ofour, ofive, osix, oseven, oeight, onine, ten, eleven, twelve, thirteen, fourteen, fifteen, sixteen, seventeen, eighteen, nineteen, twenty, twentyone]
         var order = ['2004', '2005', '2006', '2007', '2008', '2009', '2010', '2011', '2012', '2013', '2014', '2015', '2016', '2017', '2018', '2019', '2020', '2021']
 
         function getColor(amt) {
@@ -168,11 +266,11 @@
 
         var highways = L.geoJSON(data, { style: myStyle });
 
-    //station categorization
+        //station categorization
         //code written by Deepseek:
-            //prompt: "write a javascript function to categorize 'stations' as OPEN if (feature.properties.Opened) <= theYear,
-                //and CLOSED if (feature.properties.Closed) >= theYear"
-            //prompt: "add a new category, UNOPENED, for stations prior to their Opened date, which are displayed with a fillOpacity of 0"
+        //prompt: "write a javascript function to categorize 'stations' as OPEN if (feature.properties.Opened) <= theYear,
+        //and CLOSED if (feature.properties.Closed) >= theYear"
+        //prompt: "add a new category, UNOPENED, for stations prior to their Opened date, which are displayed with a fillOpacity of 0"
         // data compiled from Wikipedia datasets and https://www.bts.gov/ntad
         function getStationStatus(feature, currentYear) {
             const openedYear = feature.properties.Opened;
@@ -180,28 +278,28 @@
 
             const yearNum = parseInt(currentYear);
 
-        // 1. First check for UNOPENED status (has opened date and year is before it)
+            // 1. First check for UNOPENED status (has opened date and year is before it)
             if (openedYear && parseInt(openedYear) > yearNum) {
                 return "UNOPENED";
             }
 
-        // 2. Handle stations with unknown opened date
+            // 2. Handle stations with unknown opened date
             if (!openedYear || openedYear === "") {
 
-            // If no opened date, treat as OPEN unless closed date has passed
+                // If no opened date, treat as OPEN unless closed date has passed
                 if (closedYear && parseInt(closedYear) < yearNum) {
                     return "CLOSED";
                 }
                 return "OPEN";
             }
 
-        // 3. Normal case - has opened date and year is after it
+            // 3. Normal case - has opened date and year is after it
             const isNotClosed = !closedYear || closedYear === "" || parseInt(closedYear) >= yearNum;
 
             return isNotClosed ? "OPEN" : "CLOSED";
         }
 
-    //station styling
+        //station styling
         var icon = L.geoJSON(stations, {
             pointToLayer: function (feature, latlng) {
                 const status = getStationStatus(feature, selectedYear);
@@ -225,7 +323,7 @@
             }
         });
 
-    //slider
+        //slider
         function moveSlider(value) {
 
             selectedYear = 1971 + parseInt(value);
@@ -266,7 +364,7 @@
 
         moveSlider('0')
 
-    //play button
+        //play button
         //code written by Deepseek
         var animationInterval;
         var isPlaying = false;
@@ -318,7 +416,7 @@
             clearInterval(animationInterval);
         }
 
-    // legend
+        // legend
         var legendH = L.control({ position: 'bottomleft' });
         legendH.onAdd = function (map) {
             var divH = L.DomUtil.create('divH', 'info legend'),
