@@ -6,9 +6,7 @@
         /* Base Styles */
         body {
             background-color: #0a192f;
-            /* Dark navy blue */
             color: #e6f1ff;
-            /* Light blue text */
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             margin: 0;
             padding: 0;
@@ -40,7 +38,6 @@
         h1 {
             font-family: 'Courier New', monospace;
             color: #64ffda;
-            /* Teal accent */
             margin: 0 0 10px 0;
             font-size: 1.8rem;
             font-weight: 600;
@@ -48,7 +45,6 @@
 
         h2 {
             color: #ccd6f6;
-            /* Light blue */
             margin: 0 0 15px 0;
             font-size: 1.2rem;
             font-weight: 400;
@@ -57,7 +53,6 @@
 
         h3 {
             color: #8892b0;
-            /* Medium blue */
             font-family: monospace;
             position: relative;
             top: 20px;
@@ -69,7 +64,6 @@
         a {
             cursor: pointer;
             color: #64ffda !important;
-            /* Teal accent */
             text-decoration: none;
             transition: all 0.3s ease;
             font-family: 'Courier New', monospace;
@@ -242,7 +236,7 @@
         }).addTo(map);
 
         // highways
-        // data extrapolated from https://www.cbo.gov/publication/60874 and other CBO datasets refrenced in linked report
+        // data from https://taxpolicycenter.org/statistics/state-and-local-general-expenditures-capita
         var selectedYear = '2004'
         function myStyle(feature) {
             return {
